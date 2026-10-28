@@ -770,7 +770,7 @@ body::before{
         <details class="reveal"><summary>O que são perfumes inspirados (contratipos)?</summary><p>São fragrâncias desenvolvidas com essências importadas que reproduzem o perfil olfativo dos grandes perfumes do mercado. Você sente o mesmo tipo de aroma que ama, com alta fixação, por um preço muito mais acessível.</p></details>
         <details class="reveal"><summary>Qual é a fixação dos perfumes?</summary><p>Nossos perfumes têm alta concentração e fixação de 8 horas ou mais na pele. A dica é aplicar em áreas pulsantes e hidratadas, como pulsos e pescoço, para o aroma durar ainda mais.</p></details>
         <details class="reveal"><summary>Vocês entregam na minha cidade?</summary><p>Sim! Enviamos para todo o Brasil com frete grátis. Após finalizar o pedido pelo WhatsApp, combinamos o envio e o prazo de entrega para a sua região.</p></details>
-        <details class="reveal"><summary>Como funciona o pagamento?</summary><p>Você escolhe no checkout: Pix (com confirmação rápida), cartão ou pagamento na entrega, quando disponível para a sua região. Tudo é combinado com a nossa equipe pelo WhatsApp antes do envio.</p></details>
+        <details class="reveal"><summary>Como funciona o pagamento?</summary><p>Você escolhe no checkout: Pix (com confirmação rápida) ou cartão. Tudo é combinado com a nossa equipe pelo WhatsApp antes do envio.</p></details>
         <details class="reveal"><summary>Como faço o pedido? (passo a passo)</summary><p>É rápido e dá para fazer tudo pelo site, no computador ou no celular, em 4 passos: <strong>1) Escolha</strong> — navegue pelo catálogo e toque no perfume para ver as notas e o tamanho; <strong>2) Monte a sacola</strong> — adicione quantos quiser e acompanhe o total na hora; <strong>3) Seus dados</strong> — preencha nome, endereço de entrega e a forma de pagamento; <strong>4) Finalize</strong> — toque em finalizar e o pedido chega pronto no nosso WhatsApp, com os itens, o total e o seu endereço. É só confirmar.</p></details>
       </div>
     </div>
@@ -1144,7 +1144,6 @@ body::before{
       + '<div class="pay-opts">'
       +   payOpt("Pix", "pix", '<path d="M12 2 2 12l10 10 10-10Z"/>')
       +   payOpt("Cartão", "cartao", '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>')
-      +   payOpt("Na entrega", "entrega", '<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>')
       + '</div>'
       + pix
       + '<div class="field" style="margin-top:14px"><label for="f-obs">Observações</label><textarea id="f-obs" name="obs" rows="2" placeholder="Ex.: ponto de referência, embrulho para presente…"></textarea></div>'
@@ -1231,7 +1230,7 @@ body::before{
       nome: fd.get("nome"), tel: fd.get("tel"), tipo: fd.get("tipo"),
       endereco: fd.get("endereco"), bairro: fd.get("bairro"), cep: fd.get("cep"),
       cidade: fd.get("cidade"), uf: (fd.get("uf")||"").toUpperCase(),
-      pag: ({pix:"Pix", cartao:"Cartão", entrega:"Na entrega"})[fd.get("pag")] || fd.get("pag"),
+      pag: ({pix:"Pix", cartao:"Cartão"})[fd.get("pag")] || fd.get("pag"),
       obs: fd.get("obs")
     };
     var texto = montarPedido(dados);
@@ -1241,7 +1240,7 @@ body::before{
 
   $("#copy-order").addEventListener("click", function(){
     var form = $("#checkout-form"); var dados = null;
-    if (form){ var fd = new FormData(form); dados = { nome:fd.get("nome"), tel:fd.get("tel"), tipo:fd.get("tipo"), endereco:fd.get("endereco"), bairro:fd.get("bairro"), cep:fd.get("cep"), cidade:fd.get("cidade"), uf:(fd.get("uf")||"").toUpperCase(), pag:({pix:"Pix",cartao:"Cartão",entrega:"Na entrega"})[fd.get("pag")]||fd.get("pag"), obs:fd.get("obs") }; }
+    if (form){ var fd = new FormData(form); dados = { nome:fd.get("nome"), tel:fd.get("tel"), tipo:fd.get("tipo"), endereco:fd.get("endereco"), bairro:fd.get("bairro"), cep:fd.get("cep"), cidade:fd.get("cidade"), uf:(fd.get("uf")||"").toUpperCase(), pag:({pix:"Pix",cartao:"Cartão"})[fd.get("pag")]||fd.get("pag"), obs:fd.get("obs") }; }
     var texto = montarPedido(dados);
     if (navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(texto).then(function(){ toast("Pedido copiado!"); }, function(){ toast("Não foi possível copiar"); });
