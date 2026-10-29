@@ -598,7 +598,6 @@ body::before{
     </a>
     <nav class="nav" id="nav" aria-label="Menu principal">
       <a href="#catalogo" data-nav>Perfumes</a>
-      <a href="#colecoes" data-nav>Coleções</a>
       <a href="#sobre" data-nav>Sobre</a>
       <a href="#contato" data-nav>Contato</a>
     </nav>
@@ -686,31 +685,6 @@ body::before{
   </section>
 
 
-  <!-- ===================== COLEÇÕES ===================== -->
-  <section class="section" id="colecoes" style="padding-top:0">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="eyebrow">Coleções</span>
-        <h2>Para elas e para eles</h2>
-      </div>
-      <div class="lines">
-        <article class="line-card line-card--m reveal">
-          <img class="line-card__bg" alt="" aria-hidden="true">
-          <span class="line-card__k">Para eles</span>
-          <h3>Masculinos</h3>
-          <p>Amadeirados, marcantes e cheios de presença. De Own The Party a Marine, o rastro que não passa despercebido.</p>
-          <a class="btn btn--ghost btn--sm" href="#catalogo" data-nav data-pre="masculino">Ver masculinos</a>
-        </article>
-        <article class="line-card line-card--f reveal">
-          <img class="line-card__bg" alt="" aria-hidden="true">
-          <span class="line-card__k">Para elas</span>
-          <h3>Femininos</h3>
-          <p>Florais, doces e inesquecíveis. De Beauty a Girl, a essência que combina com cada momento do seu dia.</p>
-          <a class="btn btn--ghost btn--sm" href="#catalogo" data-nav data-pre="feminino">Ver femininos</a>
-        </article>
-      </div>
-    </div>
-  </section>
 
 
   <!-- ===================== SOBRE ===================== -->
@@ -1374,8 +1348,6 @@ body::before{
     });
     hero.addEventListener("mouseleave", function(){ fr.style.setProperty("--mx","0deg"); fr.style.setProperty("--my","0deg"); });
   })();
-  var _le=document.querySelector(".line-card--m .line-card__bg"); if(_le) _le.src=FOTOS.marine;
-  var _lf=document.querySelector(".line-card--f .line-card__bg"); if(_lf) _lf.src=FOTOS.beauty;
 
   /* start */
   renderGrid();
