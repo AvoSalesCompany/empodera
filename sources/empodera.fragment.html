@@ -335,9 +335,9 @@ body::before{
 
 
 /* ---------- Sobre ---------- */
+.frase2{ display:block; }
 .about{ display:grid; grid-template-columns: 1.1fr .9fr; gap:52px; align-items:center; }
-.about__media{ position:relative; border-radius: var(--radius-lg); overflow:hidden; aspect-ratio: 1/1; border:1px solid var(--line-2);
-  background: radial-gradient(90% 80% at 50% 20%, rgba(124,92,255,.3), transparent 60%), linear-gradient(180deg,#171125,#0a0810); display:grid; place-items:center; }
+.about__media{ position:relative; aspect-ratio: 1/1; display:grid; place-items:center; }
 .about__media svg{ width:58%; }
 .about__media path{ fill: var(--violet); filter: drop-shadow(0 20px 40px rgba(124,92,255,.5)); }
 .stat-row{ display:flex; flex-wrap:wrap; gap:26px 40px; margin-top:28px; }
@@ -1432,7 +1432,7 @@ html{ touch-action: pan-x pan-y; }
   window.addEventListener("scroll", function(){ header.classList.toggle("scrolled", window.scrollY > 10); }, { passive:true });
   header.classList.toggle("scrolled", window.scrollY > 10);
 
-  var nav = $("#nav");
+  var nav = $("#nav"), toggle = $("#menu-toggle") || document.createElement("span");
   /* menu agora e CSS (checkbox #menu-chk); JS nao precisa alternar */
 
   /* ========================================================
