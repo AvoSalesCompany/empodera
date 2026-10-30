@@ -694,6 +694,12 @@ body::before{
   #menu-chk:checked ~ .header__actions .menu-toggle span:nth-child(2){ opacity:0; }
   #menu-chk:checked ~ .header__actions .menu-toggle span:nth-child(3){ top:22px; transform:rotate(-45deg); }
 }
+
+/* ===== Ajustes mobile: sem menu hamburguer + "E" junto na 2a linha ===== */
+@media (max-width: 720px){
+  .menu-toggle{ display:none !important; }
+  .frase2{ display:block; }
+}
 </style>
 
 <a class="skip" href="#catalogo">Ir para os perfumes</a>
@@ -801,7 +807,7 @@ body::before{
     <div class="container about">
       <div class="reveal">
         <span class="eyebrow eyebrow--gold">Quem é a Empodera</span>
-        <h2 class="sec-head" style="font-family:var(--font-display); font-size:clamp(30px,5vw,50px); font-weight:600; margin-top:16px;">Perfume é presença. E presença <span class="h-script text-grad">empodera</span>.</h2>
+        <h2 class="sec-head" style="font-family:var(--font-display); font-size:clamp(30px,5vw,50px); font-weight:600; margin-top:16px;">Perfume é presença. <span class="frase2">E presença <span class="h-script text-grad">empodera</span>.</span></h2>
         <p style="margin-top:18px;">A Empodera Cosméticos nasceu no Rio Grande do Sul e Santa Catarina com um propósito simples: colocar as fragrâncias que todo mundo ama ao alcance de todo mundo. Nossos perfumes são inspirados nos grandes clássicos da perfumaria, com essências importadas e <b style="color:var(--ink)">alta fixação</b> — o cheiro que acompanha você o dia inteiro.</p>
         <p>Atendemos clientes em todo o Brasil com frete grátis, e marcamos presença nos maiores eventos da região. Aqui, cada venda é um atendimento próximo, de pessoa para pessoa.</p>
         <div class="stat-row">
