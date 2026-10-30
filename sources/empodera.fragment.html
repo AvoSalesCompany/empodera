@@ -553,7 +553,7 @@ body::before{
 .toast svg{ width:18px; height:18px; color: var(--ok); }
 
 /* ================= Responsivo ================= */
-@media (max-width: 920px){
+@media (max-width: 920px) and (pointer: coarse){
   .hero__grid{ grid-template-columns: 1fr; gap:40px; }
   .hero__visual{ min-height: 360px; order:-1; }
   .about{ grid-template-columns: 1fr; gap:34px; }
@@ -566,7 +566,7 @@ body::before{
   .modal__media{ min-height: 230px; }
   .modal__script{ font-size:40px; }
 }
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   .nav{
     position: fixed; inset: calc(var(--header-h) + env(safe-area-inset-top,0px)) 0 auto 0;
     flex-direction: column; align-items: stretch; gap:0;
@@ -583,7 +583,7 @@ body::before{
   .final__cta{ flex-direction:column; }
   .final__cta .btn{ width:100%; }
 }
-@media (max-width: 420px){
+@media (max-width: 420px) and (pointer: coarse){
   .grid{ grid-template-columns: 1fr 1fr; gap:13px; }
   .card__name{ font-size:21px; }
   .card__script{ font-size:27px; }
@@ -600,7 +600,7 @@ body::before{
 }
 
 /* ===== Refinamentos só do mobile (PC não muda) ===== */
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   .brand__name{ font-size: 18px; letter-spacing: .14em; }
   .brand__mark{ width: 30px; height: 30px; }
   .hero{ padding-top: calc(var(--header-h) + 28px); padding-bottom: 56px; }
@@ -623,7 +623,7 @@ body::before{
   .footer__bottom{ flex-direction: column; gap: 6px; }
   .section{ padding-block: clamp(48px, 11vw, 72px); }
 }
-@media (max-width: 420px){
+@media (max-width: 420px) and (pointer: coarse){
   .hero__frame{ width: min(290px, 92%); }
   .card__body{ padding: 12px; }
   .card__name{ font-size: 20px; }
@@ -632,7 +632,7 @@ body::before{
 }
 
 /* ===== Logo como marca d'agua atras do texto (so mobile) ===== */
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   .hero__logo-bg{ display:none; }                       /* tira a logo solta na area da foto */
   .hero__grid > div:first-child{ position:relative; z-index:0; }
   .hero__grid > div:first-child > *{ position:relative; z-index:1; }
@@ -646,7 +646,7 @@ body::before{
 }
 
 /* ===== Header mobile mais limpo + foto do herói plana (só mobile) ===== */
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   :root{ --header-h: 58px; }
   .header{
     background: rgba(11,10,15,.92);
@@ -664,7 +664,7 @@ body::before{
 
 
 /* ===== Logo atras do texto do "Sobre" (so mobile) ===== */
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   .about__media{ display:none; }
   .about > div:first-child{ position:relative; z-index:0; }
   .about > div:first-child > *{ position:relative; z-index:1; }
@@ -688,7 +688,7 @@ body::before{
 
 /* ===== Menu sem JS (checkbox) ===== */
 .menu-chk{ position:absolute; opacity:0; width:0; height:0; pointer-events:none; }
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   #menu-chk:checked ~ .nav{ transform:none; opacity:1; visibility:visible; }
   #menu-chk:checked ~ .header__actions .menu-toggle span:nth-child(1){ top:22px; transform:rotate(45deg); }
   #menu-chk:checked ~ .header__actions .menu-toggle span:nth-child(2){ opacity:0; }
@@ -696,20 +696,31 @@ body::before{
 }
 
 /* ===== Ajustes mobile: sem menu hamburguer + "E" junto na 2a linha ===== */
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   .menu-toggle{ display:none !important; }
   .frase2{ display:block; }
 }
 
 /* ===== Sem zoom (campos nao ampliam + sem pinca/duplo-toque) ===== */
 html{ touch-action: pan-x pan-y; }
-@media (max-width: 720px){
+@media (max-width: 720px) and (pointer: coarse){
   input, select, textarea{ font-size: 16px !important; }
 }
 </style>
 <script>
 (function(){
   try{
+    /* identifica o aparelho automaticamente a cada acesso */
+    var ua = navigator.userAgent || '';
+    var coarse = false; try{ coarse = window.matchMedia('(pointer: coarse)').matches; }catch(e){}
+    var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|BlackBerry|webOS|Mobile|Silk|Kindle/i.test(ua)
+      || (navigator.maxTouchPoints > 1 && /Macintosh|Mac OS X/.test(ua))
+      || coarse;
+    var root = document.documentElement;
+    root.classList.remove('is-mobile','is-desktop');
+    root.classList.add(isMobile ? 'is-mobile' : 'is-desktop');
+
+    /* trava o zoom */
     var vp=document.querySelector('meta[name="viewport"]');
     if(!vp){ vp=document.createElement('meta'); vp.setAttribute('name','viewport'); (document.head||document.documentElement).appendChild(vp); }
     vp.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');
