@@ -577,9 +577,9 @@ body::before{
     flex-direction: column; align-items: stretch; gap:0;
     background: rgba(11,10,15,.97); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
     border-bottom:1px solid var(--line); padding: 8px max(var(--gutter), env(safe-area-inset-left,0px)) 18px;
-    transform: translateY(-120%); transition: transform .3s; box-shadow: var(--shadow);
+    transform: translateY(-120%); opacity:0; visibility:hidden; transition: transform .3s, opacity .25s, visibility .3s; box-shadow: var(--shadow);
   }
-  .nav.open{ transform: none; }
+  .nav.open{ transform: none; opacity:1; visibility:visible; }
   .nav a{ padding:14px 4px; border-bottom:1px solid var(--line); font-size:16px; color: var(--ink); }
   .nav a::after{ display:none; }
   .menu-toggle{ display:block; }
