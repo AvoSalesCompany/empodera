@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
   <title>Empodera Cosméticos</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Empodera Cosméticos — perfumes de alta fixação inspirados nas grandes fragrâncias, com frete grátis para todo o Brasil. Monte sua sacola e feche o pedido pelo WhatsApp.">
@@ -705,7 +705,26 @@ body::before{
   .menu-toggle{ display:none !important; }
   .frase2{ display:block; }
 }
+
+/* ===== Sem zoom (campos nao ampliam + sem pinca/duplo-toque) ===== */
+html{ touch-action: pan-x pan-y; }
+@media (max-width: 720px){
+  input, select, textarea{ font-size: 16px !important; }
+}
 </style>
+<script>
+(function(){
+  try{
+    var vp=document.querySelector('meta[name="viewport"]');
+    if(!vp){ vp=document.createElement('meta'); vp.setAttribute('name','viewport'); (document.head||document.documentElement).appendChild(vp); }
+    vp.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');
+    var stop=function(e){ e.preventDefault(); };
+    document.addEventListener('gesturestart', stop, {passive:false});
+    document.addEventListener('gesturechange', stop, {passive:false});
+    document.addEventListener('gestureend', stop, {passive:false});
+  }catch(e){}
+})();
+</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0A0F'/%3E%3Cpath d='M20 18l24 6-18 10 20 6-26 6 14-14z' fill='none' stroke='%237C5CFF' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
