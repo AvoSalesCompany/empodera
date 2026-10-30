@@ -464,6 +464,8 @@ body::before{
 .totals__row--total{ font-size:19px; color: var(--ink); font-weight:700; padding-top:7px; border-top:1px dashed var(--line-2); margin-top:3px; }
 .totals__row--total span:last-child{ font-variant-numeric: tabular-nums; }
 .totals__free{ color: var(--ok); font-weight:600; }
+.field-erro{ border-color:#ff6b81 !important; box-shadow:0 0 0 2px rgba(255,107,129,.15); }
+.checkout__erro{ color:#ff8da0; font-size:13.5px; font-weight:600; margin-top:6px; }
 .btn--text{ background:none; border:0; color: var(--muted); font-size:14px; cursor:pointer; padding:6px; }
 .btn--text:hover{ color: var(--ink); }
 
@@ -529,6 +531,13 @@ body::before{
 .veil.reveal .veil__logo path{ opacity:0; transform: translateY(-26px); transition: opacity .26s ease-in, transform .3s cubic-bezier(.4,0,.2,1); }
 .veil__name{ position:absolute; bottom: 20%; font-family: var(--font-brand); letter-spacing:.42em; text-transform:uppercase; font-size:15px; color: var(--violet-glow); opacity:0; }
 .veil.cover .veil__name{ opacity:1; transition: opacity .3s ease .12s; }
+
+/* ======= Telas (páginas internas) ======= */
+.screen{ padding-top: calc(var(--header-h) + 48px); padding-bottom: 80px; min-height: 72vh; }
+.screen__back{ display:inline-flex; align-items:center; gap:8px; margin-bottom:26px; padding:10px 18px; border-radius:999px; border:1.5px solid var(--line-2); background:transparent; color:var(--ink); font-weight:600; font-size:14.5px; cursor:pointer; transition: border-color .2s, background .2s, transform .2s; }
+.screen__back:hover{ border-color:var(--violet); background:rgba(124,92,255,.1); transform:translateX(-2px); }
+.screen__back svg{ width:18px; height:18px; }
+.screen .faq, .screen .legal{ margin-top:30px; }
 
 /* ======= reveal on scroll (visível em repouso; só anima a entrada) ======= */
 .reveal{ opacity:1; transform:none; }
@@ -720,10 +729,15 @@ body::before{
     </div>
   </section>
 
-  <!-- ===================== FAQ ===================== -->
-  <section class="section" id="faq" style="padding-top:0">
+
+
+</main>
+
+  <!-- ===================== TELA: PERGUNTAS FREQUENTES ===================== -->
+  <section class="screen" id="tela-faq" hidden>
     <div class="container">
-      <div class="sec-head sec-head--center reveal">
+      <button class="screen__back" type="button" data-voltar><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Voltar</button>
+            <div class="sec-head sec-head--center reveal">
         <span class="eyebrow eyebrow--gold" style="justify-content:center">Dúvidas</span>
         <h2>Perguntas frequentes</h2>
       </div>
@@ -737,10 +751,11 @@ body::before{
     </div>
   </section>
 
-  <!-- ===================== PRIVACIDADE ===================== -->
-  <section class="section" id="politica" style="padding-top:0">
+  <!-- ===================== TELA: POLÍTICA DE PRIVACIDADE ===================== -->
+  <section class="screen" id="tela-privacidade" hidden>
     <div class="container">
-      <div class="sec-head sec-head--center reveal">
+      <button class="screen__back" type="button" data-voltar><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Voltar</button>
+            <div class="sec-head sec-head--center reveal">
         <span class="eyebrow" style="justify-content:center">Transparência</span>
         <h2>Política de privacidade</h2>
       </div>
@@ -751,7 +766,6 @@ body::before{
     </div>
   </section>
 
-</main>
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="footer" id="contato">
@@ -1105,17 +1119,12 @@ body::before{
   function checkoutHTML(){
     var pix = LOJA.pixChave ? '<p class="field" style="font-size:13.5px;color:var(--muted)">Chave Pix: <b style="color:var(--ink)">'+LOJA.pixChave+'</b></p>' : '';
     return '<form class="checkout" id="checkout-form" novalidate>'
-      + '<h3>Como você quer receber?</h3>'
-      + '<div class="segment">'
-      +   '<label><input type="radio" name="tipo" value="entrega" checked><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13v8H3zM16 10h3l2 3v2h-5"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg> Entrega</span></label>'
-      +   '<label><input type="radio" name="tipo" value="retirada"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg> Retirada</span></label>'
-      + '</div>'
       + '<h3>Seus dados</h3>'
       + '<div class="field"><label for="f-nome">Nome completo *</label><input id="f-nome" name="nome" autocomplete="name" required></div>'
-      + '<div class="field"><label for="f-tel">WhatsApp *</label><input id="f-tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="(51) 9 9999-9999" required></div>'
+      + '<div class="field"><label for="f-tel">WhatsApp *</label><input id="f-tel" name="tel" inputmode="tel" autocomplete="tel" maxlength="16" placeholder="(51) 99999-9999" required></div>'
       + '<div class="delivery">'
       +   '<div class="field"><label for="f-end">Endereço (rua e número) *</label><input id="f-end" name="endereco" autocomplete="street-address" required></div>'
-      +   '<div class="field field--row"><div><label for="f-bairro">Bairro *</label><input id="f-bairro" name="bairro" required></div><div><label for="f-cep">CEP</label><input id="f-cep" name="cep" inputmode="numeric" placeholder="00000-000"></div></div>'
+      +   '<div class="field field--row"><div><label for="f-bairro">Bairro *</label><input id="f-bairro" name="bairro" required></div><div><label for="f-cep">CEP *</label><input id="f-cep" name="cep" inputmode="numeric" maxlength="9" placeholder="00000-000" required></div></div>'
       +   '<div class="field field--row"><div><label for="f-cidade">Cidade *</label><input id="f-cidade" name="cidade" required></div><div><label for="f-uf">UF *</label><input id="f-uf" name="uf" maxlength="2" placeholder="RS" required></div></div>'
       + '</div>'
       + '<h3>Pagamento</h3>'
@@ -1125,6 +1134,7 @@ body::before{
       + '</div>'
       + pix
       + '<div class="field" style="margin-top:14px"><label for="f-obs">Observações</label><textarea id="f-obs" name="obs" rows="2" placeholder="Ex.: ponto de referência, embrulho para presente…"></textarea></div>'
+      + '<p class="checkout__erro" id="checkout-erro" role="alert" hidden></p>'
       + '</form>';
   }
   function payOpt(label, val, path){
@@ -1158,11 +1168,44 @@ body::before{
     $$("[data-dec]", body).forEach(function(b){ b.addEventListener("click", function(){ setQt(+b.getAttribute("data-dec"), -1); }); });
     $$("[data-rm]", body).forEach(function(b){ b.addEventListener("click", function(){ rmItem(+b.getAttribute("data-rm")); }); });
     if (checkoutMode){
-      var dv = $(".delivery", body);
-      $$('input[name="tipo"]', body).forEach(function(r){
-        r.addEventListener("change", function(){ dv.style.display = (r.value==="retirada") ? "none" : ""; });
+      var tel = $("#f-tel"); if (tel) tel.addEventListener("input", function(){ this.value = mascaraTel(this.value); });
+      var cep = $("#f-cep"); if (cep) cep.addEventListener("input", function(){ this.value = mascaraCep(this.value); });
+      var uf = $("#f-uf"); if (uf) uf.addEventListener("input", function(){ this.value = this.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0,2); });
+      $$("#checkout-form input, #checkout-form textarea", body).forEach(function(el){
+        el.addEventListener("input", function(){ el.classList.remove("field-erro"); limparErro(); });
       });
     }
+  }
+
+  var UFS = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RO","RR","RS","SC","SP","SE","TO"];
+  function soDigitos(s){ return (s||"").replace(/\D/g,""); }
+  function mascaraTel(v){ var d=soDigitos(v).slice(0,11); if(d.length<=2) return d; var r=d.slice(2); if(r.length<=4) return "("+d.slice(0,2)+") "+r; if(d.length<=10) return "("+d.slice(0,2)+") "+r.slice(0,4)+"-"+r.slice(4); return "("+d.slice(0,2)+") "+r.slice(0,5)+"-"+r.slice(5); }
+  function mascaraCep(v){ var d=soDigitos(v).slice(0,8); return d.length>5 ? d.slice(0,5)+"-"+d.slice(5) : d; }
+  function mostrarErro(msg){ var e=document.getElementById("checkout-erro"); if(e){ e.textContent=msg; e.hidden=false; } }
+  function limparErro(){ var e=document.getElementById("checkout-erro"); if(e) e.hidden=true; }
+  function validarCheckout(form){
+    function val(n){ return (new FormData(form).get(n)||"").trim(); }
+    var checks = [
+      ["nome", function(v){ return /^[A-Za-zÀ-ÿ'.-]{2,}(\s+[A-Za-zÀ-ÿ'.-]{2,})+$/.test(v); }, "Digite seu nome completo (nome e sobrenome)."],
+      ["tel", function(v){ var d=soDigitos(v); return d.length>=10 && d.length<=11; }, "Digite um WhatsApp válido com DDD, ex.: (51) 99999-9999."],
+      ["endereco", function(v){ return v.length>=6 && (/\d/.test(v) || /\s/.test(v)); }, "Digite a rua e o número da entrega."],
+      ["bairro", function(v){ return /[A-Za-zÀ-ÿ]{2,}/.test(v); }, "Digite o bairro."],
+      ["cep", function(v){ return soDigitos(v).length===8; }, "Digite um CEP válido (8 números)."],
+      ["cidade", function(v){ return /[A-Za-zÀ-ÿ]{2,}/.test(v); }, "Digite a cidade."],
+      ["uf", function(v){ return UFS.indexOf(v.toUpperCase())>=0; }, "Digite uma UF válida (ex.: RS, SC)."]
+    ];
+    for (var i=0;i<checks.length;i++){
+      var el=form.querySelector('[name="'+checks[i][0]+'"]');
+      if(!el) continue;
+      el.classList.remove("field-erro");
+      if(!checks[i][1](val(checks[i][0]))){
+        el.classList.add("field-erro"); mostrarErro(checks[i][2]);
+        try{ el.focus(); el.scrollIntoView({block:"center"}); }catch(e){}
+        return false;
+      }
+    }
+    if(!form.querySelector('input[name="pag"]:checked')){ mostrarErro("Escolha a forma de pagamento."); return false; }
+    limparErro(); return true;
   }
 
   function montarPedido(dados){
@@ -1180,11 +1223,7 @@ body::before{
       linhas.push("*Meus dados*");
       linhas.push("Nome: "+dados.nome);
       linhas.push("WhatsApp: "+dados.tel);
-      if (dados.tipo === "retirada"){
-        linhas.push("Entrega: Retirar com a loja");
-      } else {
-        linhas.push("Entrega: "+dados.endereco+", "+dados.bairro+" — "+dados.cidade+"/"+dados.uf+(dados.cep?" — CEP "+dados.cep:""));
-      }
+      linhas.push("Entrega: "+dados.endereco+", "+dados.bairro+" — "+dados.cidade+"/"+dados.uf+" — CEP "+dados.cep);
       linhas.push("Pagamento: "+dados.pag);
       if (dados.obs) linhas.push("Obs: "+dados.obs);
     }
@@ -1202,10 +1241,10 @@ body::before{
     }
     // validar
     var form = $("#checkout-form");
-    if (!form.checkValidity()){ form.reportValidity(); return; }
+    if (!validarCheckout(form)) return;
     var fd = new FormData(form);
     var dados = {
-      nome: fd.get("nome"), tel: fd.get("tel"), tipo: fd.get("tipo"),
+      nome: fd.get("nome").trim(), tel: fd.get("tel").trim(),
       endereco: fd.get("endereco"), bairro: fd.get("bairro"), cep: fd.get("cep"),
       cidade: fd.get("cidade"), uf: (fd.get("uf")||"").toUpperCase(),
       pag: ({pix:"Pix", cartao:"Cartão"})[fd.get("pag")] || fd.get("pag"),
@@ -1218,7 +1257,7 @@ body::before{
 
   $("#copy-order").addEventListener("click", function(){
     var form = $("#checkout-form"); var dados = null;
-    if (form){ var fd = new FormData(form); dados = { nome:fd.get("nome"), tel:fd.get("tel"), tipo:fd.get("tipo"), endereco:fd.get("endereco"), bairro:fd.get("bairro"), cep:fd.get("cep"), cidade:fd.get("cidade"), uf:(fd.get("uf")||"").toUpperCase(), pag:({pix:"Pix",cartao:"Cartão"})[fd.get("pag")]||fd.get("pag"), obs:fd.get("obs") }; }
+    if (form){ var fd = new FormData(form); dados = { nome:fd.get("nome"), tel:fd.get("tel"), endereco:fd.get("endereco"), bairro:fd.get("bairro"), cep:fd.get("cep"), cidade:fd.get("cidade"), uf:(fd.get("uf")||"").toUpperCase(), pag:({pix:"Pix",cartao:"Cartão"})[fd.get("pag")]||fd.get("pag"), obs:fd.get("obs") }; }
     var texto = montarPedido(dados);
     if (navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(texto).then(function(){ toast("Pedido copiado!"); }, function(){ toast("Não foi possível copiar"); });
@@ -1291,7 +1330,8 @@ body::before{
   function irPara(hash, pre){
     var alvo = hash && hash.charAt(0)==="#" ? document.querySelector(hash) : null;
     transicao(function(){
-      // fecha menus
+      // fecha menus e volta à home
+      mostrarHome();
       nav.classList.remove("open"); toggle.setAttribute("aria-expanded","false");
       if (pre){
         var fb = $$(".filter").filter(function(x){ return x.getAttribute("data-filter")===pre; })[0];
@@ -1306,13 +1346,32 @@ body::before{
     });
   }
 
+  function mostrarHome(){ var m=document.querySelector("main"); if(m) m.hidden=false; $$(".screen").forEach(function(s){ s.hidden=true; }); }
+  function abrirTela(id){
+    transicao(function(){
+      nav.classList.remove("open"); toggle.setAttribute("aria-expanded","false");
+      var m=document.querySelector("main"); if(m) m.hidden=true;
+      $$(".screen").forEach(function(s){ s.hidden=true; });
+      var t=document.getElementById(id);
+      if(t){ t.hidden=false; t.querySelectorAll(".reveal").forEach(function(el){ el.classList.remove("pending"); el.classList.add("inview"); }); }
+      window.scrollTo({ top:0, behavior:"auto" });
+    });
+  }
+  function abrirHome(){
+    transicao(function(){ mostrarHome(); nav.classList.remove("open"); toggle.setAttribute("aria-expanded","false"); window.scrollTo({ top:0, behavior:"auto" }); });
+  }
+
   document.addEventListener("click", function(e){
+    var voltar = e.target.closest("[data-voltar]");
+    if (voltar){ e.preventDefault(); abrirHome(); return; }
     var a = e.target.closest("[data-nav]");
     if (!a) return;
     var href = a.getAttribute("href");
     if (!href || href.charAt(0) !== "#") return;
     e.preventDefault();
     if (drawer.classList.contains("open")) closeDrawer();
+    if (href === "#faq"){ abrirTela("tela-faq"); return; }
+    if (href === "#politica"){ abrirTela("tela-privacidade"); return; }
     irPara(href, a.getAttribute("data-pre"));
   });
 
