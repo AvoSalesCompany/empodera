@@ -666,48 +666,7 @@ body::before{
   .hero__tilt{ animation: none !important; transform: none !important; }
 }
 
-/* ========= TEMA CLARO — só no mobile (PC continua escuro) ========= */
-@media (max-width: 720px){
-  :root{
-    color-scheme: light;
-    --bg:    #F5F2FC;
-    --bg-2:  #FFFFFF;
-    --bg-3:  #EBE5F8;
-    --card:  #FFFFFF;
-    --card-2:#F4F0FC;
-    --ink:   #1D1536;
-    --muted: #574F6E;
-    --faint: #8B8398;
-    --line:  rgba(96,72,184,.16);
-    --line-2:rgba(96,72,184,.30);
-    --violet-ink: #ECE6FB;
-    --shadow: 0 20px 44px -26px rgba(76,54,140,.30);
-    --shadow-violet: 0 20px 48px -22px rgba(124,92,255,.42);
-  }
-  .header, .header.scrolled{
-    background: rgba(255,255,255,.9);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid var(--line);
-  }
-  .brand__name b{ color: var(--violet-deep); }
-  .nav{ background: rgba(255,255,255,.98); }
-  .trust-strip{ background: rgba(255,255,255,.6); }
-  .hero__badge{ background: rgba(255,255,255,.92); border-color: var(--line-2); }
-  .hero__badge strong{ color: var(--ink); }
-  .hero__badge span{ color: var(--muted); }
-  .hero__grid > div:first-child::before{ opacity:.06; }
-  .search input{ background:#fff; }
-  .field input, .field textarea, .field select{ background:#fff; }
-  .step{ background:#fff; }
-  .team-card{ background:#fff; }
-  .faq details{ background:#fff; }
-  .card__media{ background: linear-gradient(180deg, var(--card-2), #E9E3F6); }
-  .cart-item__media{ background: linear-gradient(180deg, #F0EAFA, #E9E3F6); }
-  .modal__close{ background: rgba(255,255,255,.8); color: var(--ink); border-color: var(--line-2); }
-  .veil{ background: rgba(245,242,252,.96); }
-  body::before{ background: var(--bg); }
-}
+
 
 /* ===== Logo atras do texto do "Sobre" (so mobile) ===== */
 @media (max-width: 720px){
