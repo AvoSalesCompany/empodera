@@ -1077,7 +1077,7 @@ body::before{
       + '<div class="card__media">'
       +   '<span class="card__tag">'+(p.linha==="masculino"?"Masculino":"Feminino")+'</span>'
       +   (p.foto
-            ? ((p.overlayName?'<span class="card__script">'+p.nome+'</span>':'')+'<img class="card__img" src="'+p.foto+'" alt="Perfume '+p.nome+' — inspirado em '+p.insp+'" loading="lazy">')
+            ? ((p.overlayName?'<span class="card__script">'+p.nome+'</span>':'')+'<img class="card__img" src="'+p.foto+'" alt="Perfume '+p.nome+' — inspirado em '+p.insp+'" loading="eager">')
             : '<span class="card__script">'+p.nome+'</span><svg class="card__flacon" viewBox="0 0 120 180" style="color:'+p.fam+'"><use href="#flacon-def"/></svg>')
       + '</div>'
       + '<div class="card__body">'
